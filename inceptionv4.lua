@@ -214,6 +214,7 @@ net:add(Reduction_B())    -- 17x17x1024 ==> 8x8x1536
 for i=1,3 do
   net:add(Inception_C())  -- 8x8x1536 ==> 8x8x1536
 end
-net:add(nn.SpatialAveragePooling(8, 8)):ceil() -- 1536
-net:add(nn.Dropout(0.8))
+net:add(nn.SpatialAveragePooling(8, 8)):ceil() -- 8x8x1536 ==> 1x1x1536
+net:add(nn.Dropout(0.2))
+net:add(nn.Linear(1536, 1000))  -- 1536 ==> 1000
 net:add(nn.SoftMax())
